@@ -22,16 +22,7 @@ class Pestilo{
   
  /************** FUNCIONES **************
  ---------------------------------------*/
-  //--- PALETA DE COLORES ---//
-  /*
-  se ingresa la paleta de colores a utilizar
-  mediante array de colores
-  */
-  void paleta(color[] pal){
-   paleta= pal; 
-   cantColores= pal.length; //define la cantidad de colores que hay   
-  }//----------------//
-  
+   
   //--- RELLENO ---//
   /*
   estilo de relleno
@@ -82,7 +73,12 @@ class Pestilo{
   tam: tamaño de la linea
   */
   void addEstilo(char estilo, int colIndex, int tam){
-    colIndex= colIndex % cantColores;
+    paleta= pal; //carga paleta de colores
+    
+    cantColores= paleta.length; //define la cantidad de colores que hay   
+
+    colIndex= colIndex % cantColores; //normaliza la paleta (evita que array salga de limites)
+    
     switch(estilo){
       case 'R':    
       relleno(colIndex);
