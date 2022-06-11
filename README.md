@@ -1,5 +1,5 @@
 # Pestilo
-objeto para definir estilo gráfico
+Objeto que define y aplica estilo grafico 
 
 - Pestilo.paleta( x );  
 x = array de colores
