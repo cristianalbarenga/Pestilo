@@ -1,21 +1,24 @@
-/*
-  --Objeto Estilo--
-  define unt tipo de estilo grafico 
-  para utilizar 
-  Formas Rellenas ('R') - Formas Lineales ('L')
-  Combinacion de relleno y linea ('C')
+/*--- OBJETO ESTILO ---
+  define y aplica estilo grafico 
+  ('R') Formas Rellenas
+  ('L') Formas Lineales ('L')
+  ('C') Combinacion de relleno y linea
 */
+
 class Pestilo{
+  
  /************** VARIABLES *************
   -------------------------------------*/  
  color[] paleta; //paleta de color
+ int cantColores; //cantidad de colores
  
  /************* CONSTRUCTOR *************   
  ---------------------------------------*/   
   Pestilo(){   
-   noFill();
-   noStroke();
+     noFill();
+     noStroke();
   }
+  
   
  /************** FUNCIONES **************
  ---------------------------------------*/
@@ -25,7 +28,8 @@ class Pestilo{
   mediante array de colores
   */
   void paleta(color[] pal){
-   paleta= pal;   
+   paleta= pal; 
+   cantColores= pal.length; //define la cantidad de colores que hay   
   }//----------------//
   
   //--- RELLENO ---//
@@ -57,12 +61,14 @@ class Pestilo{
   tam: tamaño de la linea
   */
   void combinado(int colIndex,int tam){
-    int cAux;
+    int cAux; //aux, define color de la linea    
     
-    if(random(1)<0.5){ cAux= abs((colIndex-1)%2);}
-                 else{ cAux= (colIndex+1)%2;}
-      //aux, define color de la linea    
-    
+    //aumenta o disminuye una posicion del color Index
+    if(random(1)<0.5){ cAux=(colIndex+1) % cantColores; } 
+                 else{ if (colIndex != 0){ cAux=(colIndex-1) % cantColores; }
+                                     else{ cAux=cantColores-1;}                
+                     }
+                     
     fill(paleta[colIndex]);     
     stroke(paleta[cAux]);
     strokeWeight(tam);
@@ -76,7 +82,7 @@ class Pestilo{
   tam: tamaño de la linea
   */
   void addEstilo(char estilo, int colIndex, int tam){
-    colIndex= colIndex % 3;
+    colIndex= colIndex % cantColores;
     switch(estilo){
       case 'R':    
       relleno(colIndex);
